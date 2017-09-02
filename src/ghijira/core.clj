@@ -147,11 +147,9 @@
 (defn format-comment [c]
   (let [created-at (tf/parse gh-formatter (:created_at c))
         comment-text (comment-or-event-to-text c)]
-    (str "Comment:"
-         (get-user c)
-         ":"
-         (tf/unparse jira-formatter created-at)
-         ":" \newline \newline
+    (str (tf/unparse jira-formatter created-at)
+         ";" (get-user c)
+         ";" \newline \newline
          comment-text)))
 
 (defn get-labels
@@ -183,7 +181,7 @@
         "Task" ; issue type
         milestone-dashes
         (if (= "closed" (:state issue)) "Closed" "Open")
-        (if (= "closed" (:state issue)) "Fixed" "Unresolved")
+        (if (= "closed" (:state issue)) "Fixed" "")
         (get-user issue)
         (get-assignee issue)
         (get-labels issue))
