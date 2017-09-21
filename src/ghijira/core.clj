@@ -171,7 +171,7 @@
          comment-text)))
 
 (defn format-title [issue]
-  (if (:pull-request issue)
+  (if (:pull_request issue)
     (str "(PR #" (:number issue) ") " (:title issue))
     (:title issue)))
 
